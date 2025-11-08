@@ -1,73 +1,129 @@
-# Welcome to your Lovable project
+# GrayScale Blog
 
-## Project info
+Welcome to GrayScale, a modern, professional blog template built with **React**, **Vite**, **TypeScript**, and **shadcn/ui**. This project provides a clean, fast, and fully-responsive front-end for a personal or professional blog.
 
-**URL**: https://lovable.dev/projects/c6a71ae7-11c9-4fa2-842e-a7430aadf679
+## 🚀 Key Features
 
-## How can I edit this code?
+- **Modern Tech Stack**: Built with Vite for a lightning-fast development experience.
+- **Statically-Typed**: Fully written in TypeScript for better maintainability and fewer runtime errors.
+- **Beautifully Styled**: Uses Tailwind CSS for utility-first styling, with a professional theme defined in `src/index.css`.
+- **Component-Based**: Leverages `shadcn/ui` for a beautiful, accessible, and customizable component library.
+- **Fully Functional Pages**:
+    - **Home Page**: A dynamic homepage featuring a post carousel and a filterable grid of all articles.
+    - **Post Page**: A clean, readable layout for individual blog posts with social sharing and related articles.
+    - **About Page**: A dedicated page with a functional contact form.
+    - **Admin Mockup**: A simple admin panel to view all posts and a form to simulate creating new ones.
+- **Client-Side Filtering**: Includes client-side search and category filtering on the homepage.
+- **Dark Mode**: Built-in dark mode support, toggleable from the navigation bar.
 
-There are several ways of editing your application.
+## 🛠 Tech Stack
 
-**Use Lovable**
+- **Framework**: React
+- **Bundler**: Vite
+- **Language**: TypeScript
+- **Routing**: `react-router-dom` v6
+- **Styling**: Tailwind CSS
+- **UI Components**: `shadcn/ui`
+- **Icons**: `lucide-react`
+- **Notifications**: `sonner` and `react-toast`
+- **State Management**: React Hooks (`useState`, `useMemo`, `useEffect`)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c6a71ae7-11c9-4fa2-842e-a7430aadf679) and start prompting.
+## 🏁 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+To get a local copy up and running, follow these simple steps.
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+You'll need [Node.js](https://nodejs.org/en/) (v18 or later) and `npm` installed on your machine.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation & Running
 
-Follow these steps:
+1. **Clone the repository:**Bash
+    
+    `git clone https://github.com/your-username/manojreddypalla-blog.git`
+    
+2. **Navigate to the project directory:**Bash
+    
+    `cd manojreddypalla-blog`
+    
+3. **Install dependencies:**Bash
+    
+    `npm install`
+    
+4. **Run the development server:**Bash
+    
+    `npm run dev`
+    
+    Your project will be running at `http://localhost:8080`.
+    
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📂 Project Structure
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Here is an overview of the most important files and directories in this project:
 
-# Step 3: Install the necessary dependencies.
-npm i
+`manojreddypalla-blog/
+├── public/                 # Static assets (robots.txt, etc.)
+├── src/
+│   ├── components/         # Reusable React components (Navbar, BlogCard, etc.)
+│   │   └── ui/             # shadcn/ui components (Button, Card, etc.)
+│   ├── hooks/              # Custom React hooks (use-toast, use-mobile)
+│   ├── lib/                # Core logic and utilities
+│   │   ├── blogData.ts     # *** IMPORTANT: Your static blog "database" ***
+│   │   └── utils.ts        # Tailwind's cn() utility
+│   ├── pages/              # Top-level page components (Index, Post, About)
+│   ├── App.tsx             # Main app component with route definitions
+│   ├── index.css           # Global styles & Tailwind CSS theme variables
+│   └── main.tsx            # Main entry point for the React application
+├── tailwind.config.ts      # Tailwind configuration file
+└── vite.config.ts          # Vite configuration file`
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 📝 How to Add Your Own Blog Posts
 
-**Edit a file directly in GitHub**
+This project does not use a traditional database. Instead, it uses a **static data file** as a mock database.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**To add, edit, or remove blog posts, simply modify the `src/lib/blogData.ts` file.**
 
-**Use GitHub Codespaces**
+This file exports a `blogPosts` array. Each post object in the array follows the `BlogPost` interface:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+TypeScript
 
-## What technologies are used for this project?
+`export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;        // The URL-friendly version of the title
+  excerpt: string;     // A short summary for the blog card
+  content: string;     // The full post content (HTML or Markdown)
+  author: {
+    name: string;
+    avatar: string;    // Path to author's image
+    bio: string;
+  };
+  publishedAt: string; // Date in "YYYY-MM-DD" format
+  readTime: number;    // Estimated read time in minutes
+  category: string;    // "Technology", "Tutorials", etc.
+  tags: string[];
+  featured: boolean;   // `true` to show in the homepage carousel
+  imageUrl: string;    // Path to the post's main image
+}`
 
-This project is built with:
+### Important Note on Post Content
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The `src/pages/Post.tsx` component uses `dangerouslySetInnerHTML={{ __html: post.content }}` to render the blog content. This means you can write your content directly as an **HTML string** inside the `blogData.ts` file.
 
-## How can I deploy this project?
+**Example `content` string:**
 
-Simply open [Lovable](https://lovable.dev/projects/c6a71ae7-11c9-4fa2-842e-a7430aadf679) and click on Share -> Publish.
+JavaScript
 
-## Can I connect a custom domain to my Lovable project?
+`content: `
+  <h1>This is my post title</h1>
+  <p>This is the first paragraph. It supports <strong>bold text</strong>.</p>
+  <pre><code>
+    // This is a code block
+    console.log("Hello, World!");
+  </code></pre>
+  <img src="/path/to/image.jpg" alt="An image in the post" />
+``
 
-Yes, you can!
+### Admin Panel
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The `/admin` page is a **client-side mockup**. It reads from the same `blogData.ts` file. The "Create New Post" form will *not* save a new post to the file; it only simulates a successful submission by showing a toast notification. To permanently add a post, you must add it to the `blogData.ts` array.
